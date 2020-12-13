@@ -433,6 +433,10 @@ public final class AccessController {
      * @return the AccessControlContext based on the current context.
      */
 
+    private static AccessControlContext staticContext = new AccessControlContext();
+    public static AccessControlContext getContext() {
+        return staticContext;
+    }
 //    public static AccessControlContext getContext()
 //    {
 //        AccessControlContext acc = getStackAccessControlContext();

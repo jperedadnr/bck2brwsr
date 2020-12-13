@@ -26,6 +26,8 @@
 package java.lang;
 
 import java.util.Map;
+import org.apidesign.bck2brwsr.core.JavaScriptBody;
+
 
 
 /**
@@ -134,7 +136,7 @@ class Thread implements Runnable {
    /**
      * The default priority that is assigned to a thread.
      */
-    public final static int NORM_PRIORITY = 5;
+    public final static int NORM_PRIORITY = 6;
 
     /**
      * The maximum priority that a thread can have.
@@ -524,9 +526,20 @@ class Thread implements Runnable {
     @Override
     public void run() {
         if (target != null) {
-            target.run();
+             // target.run();
+// System.err.println("[JVDBG] THREAD.RUN call 0 ");
+             scheduleThread(target);
+// System.err.println("[JVDBG] THREAD.RUN call 1 ");
         }
     }
+
+    @JavaScriptBody(args = "r", body =
+        "window.setTimeout(function() {\n" +
+        "  r.run();\n" +
+        "}, 0);\n"
+    )
+    private static native void scheduleThread(Runnable r);
+
 
     /**
      * Forces the thread to stop executing.
@@ -846,7 +859,7 @@ class Thread implements Runnable {
      * @see        ThreadGroup#getMaxPriority()
      */
     public final void setPriority(int newPriority) {
-        throw new SecurityException();
+        // throw new SecurityException();
     }
 
     /**
