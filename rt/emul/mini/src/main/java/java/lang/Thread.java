@@ -506,7 +506,8 @@ class Thread implements Runnable {
      * @see        #stop()
      */
     public void start() {
-        run();
+             scheduleThread(target);
+        //  run();
 // System.err.println("I should start a thread now...");
         // throw new SecurityException();
     }
