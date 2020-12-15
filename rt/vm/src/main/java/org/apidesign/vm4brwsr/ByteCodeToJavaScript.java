@@ -73,6 +73,7 @@ abstract class ByteCodeToJavaScript {
     }
 
     final String accessClassFalse(String classOperation) {
+System.err.println("[BC2JS] accessClassFalse asked for " + classOperation+", this = " + this);
         if (mangleClassName(jc.getClassName()).equals(classOperation)) {
             return "c";
         }
