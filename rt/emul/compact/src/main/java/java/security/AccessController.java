@@ -320,8 +320,10 @@ public final class AccessController {
      * @see #doPrivileged(PrivilegedAction)
      * @see #doPrivileged(PrivilegedExceptionAction,AccessControlContext)
      */
-//    public static native <T> T doPrivileged(PrivilegedAction<T> action,
-//                                            AccessControlContext context);
+    public static <T> T doPrivileged(PrivilegedAction<T> action,
+                                            AccessControlContext context) {
+        return doPrivileged(action);
+    }
 
     /**
      * Performs the specified <code>PrivilegedExceptionAction</code> with

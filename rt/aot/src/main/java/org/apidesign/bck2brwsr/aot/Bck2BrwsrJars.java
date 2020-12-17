@@ -365,11 +365,13 @@ public final class Bck2BrwsrJars {
         }
 
         final void addClassResource(String n) throws IOException {
+            System.err.println("[JVDBG] Bck2BrwsrJars addCR for " + n+", proc = "+proc);
             if (proc != null) {
                 try (InputStream is = this.get(n)) {
                     Map<String, byte[]> conv = proc.process(n, readFrom(is), new NoConvRes());
                     if (conv != null) {
                         boolean found = false;
+                        System.err.println("[JVDBG] Bck2BrwsrJars, process entries: "+conv.entrySet());
                         for (Map.Entry<String, byte[]> entrySet : conv.entrySet()) {
                             String res = entrySet.getKey();
                             byte[] bytes = entrySet.getValue();
@@ -378,6 +380,7 @@ public final class Bck2BrwsrJars {
                             }
                             assert res.endsWith(".class") : "Wrong resource: " + res;
                             converted.put(res, bytes);
+                            System.err.println("BCK-> add class "+res);
                             classes.add(res.substring(0, res.length() - 6));
                         }
                         if (!found) {

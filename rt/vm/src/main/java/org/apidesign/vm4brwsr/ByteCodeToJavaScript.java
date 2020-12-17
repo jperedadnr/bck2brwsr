@@ -73,12 +73,14 @@ abstract class ByteCodeToJavaScript {
     }
 
     final String accessClassFalse(String classOperation) {
-System.err.println("[BC2JS] accessClassFalse asked for " + classOperation+", this = " + this);
+// System.err.println("[BC2JS] accessClassFalse asked for " + classOperation+", this = " + this);
         if (mangleClassName(jc.getClassName()).equals(classOperation)) {
             return "c";
         }
         classRefs.addIfMissing(classOperation);
-        return "(refs_" + classOperation + " || (refs_" + classOperation + " = " + accessClass(classOperation) + "(false)))";
+        String answer = "(refs_" + classOperation + " || (refs_" + classOperation + " = " + accessClass(classOperation) + "(false)))";
+        // System.err.println("[BC2JS] results in "+answer);
+        return answer;
     }
 
     protected FieldData findField(String[] fieldInfoName) throws IOException {

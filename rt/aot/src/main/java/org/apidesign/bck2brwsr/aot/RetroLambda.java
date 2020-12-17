@@ -76,6 +76,7 @@ final class RetroLambda extends OutputDirectory implements BytecodeProcessor {
         super(null);
         transformers = new Transformers(Opcodes.V1_7, false, analyzer);
         saver = new LambdaClassSaver(this, transformers, true);
+        System.err.println("RL created with "+this+" and saver = "+this.saver);
     }
 
     @Override
@@ -85,26 +86,41 @@ final class RetroLambda extends OutputDirectory implements BytecodeProcessor {
 
     @Override
     public void writeFile(Path relativePath, byte[] bytecode) throws IOException {
+        System.err.println("[RL] need to write file");
+     //   Thread.dumpStack();
         if (bytecode == null) {
+            System.err.println("[RL] bytecode null! for "+relativePath);
             return;
         }
+        try {
         ClassReader cr = new ClassReader(bytecode);
         String className = cr.getClassName();
         putBytecode(className + ".class", bytecode);
+            System.err.println("[RL] Stored "+className);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void putBytecode(String className, byte[] backportedBytecode) {
         assert className.endsWith(".class") : "Full resource: " + className;
+        System.err.println("[RL] putByteCode for "+this+", converted = "+converted+
+                " and tid = "+Thread.currentThread());
         if (converted == null) {
+            System.err.println("Converted was null!");
             converted = new HashMap<>();
         }
         converted.put(className, backportedBytecode);
+        System.err.println("Added "+className+ " to converted list which is now "
+                +converted+" and hashc = "+converted.hashCode());
     }
 
     @Override
     public Map<String, byte[]> process(
         String className, byte[] byteCode, Bck2Brwsr.Resources resources
     ) throws IOException {
+        System.err.println("[RL] process called for " + className+" on "+this+" with converted = "
+        +converted+" and tid = "+Thread.currentThread());
         int minor = byteCode[4] << 8 | byteCode[5];
         int major = byteCode[6] << 8 | byteCode[7];
         if (major <= 51) {
@@ -114,10 +130,13 @@ final class RetroLambda extends OutputDirectory implements BytecodeProcessor {
         ClassLoader prev = Thread.currentThread().getContextClassLoader();
         try (LambdaClassDumper dumper = new LambdaClassDumper(saver)) {
             Thread.currentThread().setContextClassLoader(new ResLdr(resources));
+            System.err.println("[RL] install dumper " + dumper+" for saver "+saver);
             dumper.install();
-
+            System.err.println("[RL] installed dumper " + dumper+" for saver "+saver);
             analyzer.analyze(new ClassReader(byteCode));
             byte[] newB = transformers.backportClass(new ClassReader(byteCode));
+            System.err.println("[RL] done transforming with RL = "+this+" and dumper = "+dumper+
+                    " and saver = "+saver+" and name = "+className);
             if (!Arrays.equals(newB, byteCode)) {
                 putBytecode(className, newB);
             }
@@ -129,6 +148,7 @@ final class RetroLambda extends OutputDirectory implements BytecodeProcessor {
 
         Map<String, byte[]> ret = converted;
         converted = null;
+        System.err.println("Nulled converted, will return "+ret+" and thread = "+Thread.currentThread());
         return ret;
     }
 

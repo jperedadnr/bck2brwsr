@@ -838,6 +838,14 @@ abstract class VM extends ByteCodeToJavaScript {
             StringArray asBinary, StringArray classpath
         ) throws IOException {
             super(out, resources, explicitlyExported, asBinary);
+            // System.err.println("[JVDBG] VM created extension "+this+" with extClassesArray = "+
+                    // java.util.Arrays.asList(extClassesArray));
+            // System.err.println("[JVDBG] VMEXT "+this+" has cp "+ 
+                    // (classpath == null ? "NULL" :
+                    // java.util.Arrays.asList(classpath.toArray())));
+            // System.err.println("[JVDBG] VMEXT "+this+" has expl "+
+                    // (explicitlyExported == null? "NULL" :
+                    // java.util.Arrays.asList(explicitlyExported.toArray())));
             this.extensionClasses = StringArray.asList(extClassesArray);
             this.classpath = classpath;
         }
@@ -899,8 +907,10 @@ abstract class VM extends ByteCodeToJavaScript {
         @Override
         String accessClass(String className) {
             if (this.extensionClasses.contains(className.replace('_', '/'))) {
+                // System.err.println("[JVDBG] VMextension, accessClass asked for "+className+" is simple");
                 return className;
             }
+             // System.err.println("[JVDBG] VMextension, accessClass asked for "+className+" is NOT simple");
             return super.accessClass(className);
         }
 
