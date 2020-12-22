@@ -597,4 +597,17 @@ public interface List<E> extends Collection<E> {
      *         fromIndex &gt; toIndex</tt>)
      */
     List<E> subList(int fromIndex, int toIndex);
+
+/*
+    @SuppressWarnings("unchecked")
+    static <E> List<E> of() {
+        return (List<E>) ImmutableCollections.EMPTY_LIST;
+    }
+
+
+    static <E> List<E> of(E e1) {
+        return new ImmutableCollections.List12<>(e1);
+    }
+*/
+
 }
