@@ -43,7 +43,7 @@ import org.apidesign.vm4brwsr.Bck2Brwsr;
  */
 @ExtraJavaScript(processByteCode = false, resource="")
 final class RetroLambda extends OutputDirectory implements BytecodeProcessor {
-    private Map<String,byte[]> converted;
+    private static Map<String,byte[]> converted;
     private final Transformers transformers;
     private final LambdaClassSaver saver;
     private final ClassAnalyzer analyzer = new ClassAnalyzer() {

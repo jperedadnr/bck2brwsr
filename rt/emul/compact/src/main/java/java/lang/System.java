@@ -205,5 +205,79 @@ public class System {
         public void write(int b) throws IOException {
             write(new byte[] { (byte)b });
         }
+
+
     } // end of SystemStream
+    public interface Logger {
+
+        public enum Level {
+
+            ALL(Integer.MIN_VALUE),  // typically mapped to/from j.u.l.Level.ALL
+            TRACE(400),   // typically mapped to/from j.u.l.Level.FINER
+            DEBUG(500),   // typically mapped to/from j.u.l.Level.FINEST/FINE/CONFIG
+            INFO(800),    // typically mapped to/from j.u.l.Level.INFO
+            WARNING(900), // typically mapped to/from j.u.l.Level.WARNING
+            ERROR(1000),  // typically mapped to/from j.u.l.Level.SEVERE
+            OFF(Integer.MAX_VALUE);  // typically mapped to/from j.u.l.Level.OFF
+
+            private final int severity;
+
+            private Level(int severity) {
+                this.severity = severity;
+            }
+
+            public final String getName() {
+                return name();
+            }
+
+            public final int getSeverity() {
+                return severity;
+            }
+        }
+
+        public String getName();
+
+        public boolean isLoggable(Level level);
+
+/*
+        public default void log(Level level, String msg) {
+            log(level, (ResourceBundle) null, msg, (Object[]) null);
+        }
+
+        public default void log(Level level, Supplier<String> msgSupplier) {
+            Objects.requireNonNull(msgSupplier);
+            if (isLoggable(Objects.requireNonNull(level))) {
+                log(level, (ResourceBundle) null, msgSupplier.get(), (Object[]) null);
+            }
+        }
+            Objects.requireNonNull(obj);
+            if (isLoggable(Objects.requireNonNull(level))) {
+                this.log(level, (ResourceBundle) null, obj.toString(), (Object[]) null);
+            }
+        }
+
+        public default void log(Level level, String msg, Throwable thrown) {
+            this.log(level, null, msg, thrown);
+        }
+
+        public default void log(Level level, Supplier<String> msgSupplier,
+                Throwable thrown) {
+            Objects.requireNonNull(msgSupplier);
+            if (isLoggable(Objects.requireNonNull(level))) {
+                this.log(level, null, msgSupplier.get(), thrown);
+            }
+        }
+
+        public default void log(Level level, String format, Object... params) {
+            this.log(level, null, format, params);
+        }
+
+        public void log(Level level, ResourceBundle bundle, String msg,
+                Throwable thrown);
+
+        public void log(Level level, ResourceBundle bundle, String format,
+                Object... params);
+*/
+    }
+
 }
