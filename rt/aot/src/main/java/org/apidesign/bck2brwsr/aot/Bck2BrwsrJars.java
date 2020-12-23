@@ -125,6 +125,7 @@ public final class Bck2BrwsrJars {
     public static Bck2Brwsr configureFrom(
         Bck2Brwsr c, final File jar, final ClassLoader classpath, final boolean ignoreBootClassPath
     ) throws IOException {
+        System.err.println("[BCKJARS] configureFrom, jar = "+jar+", cp = "+classpath+", ibp = "+ignoreBootClassPath);
         if (jar.isDirectory()) {
             return configureDir(ignoreBootClassPath, c, jar, classpath);
         }
