@@ -174,13 +174,16 @@ public final class Bck2BrwsrJars {
         if (c == null) {
             c = Bck2Brwsr.newCompiler();
         }
-        
-        return c
+        System.err.println("[BCK2BRWSR] almost leaving configureFrom, jar = "+jar);
+
+        Bck2Brwsr answer = c
             .library(parts)
             .addClasses(classes.toArray(new String[classes.size()]))
             .addExported(exported.toArray(new String[exported.size()]))
             .addResources(resources.toArray(new String[resources.size()]))
             .resources(jarRes);
+        System.err.println("[BCK2BRWSR] leaving configureFrom, jar = "+jar+", and answer = "+answer);
+        return answer;
     }
     
     private static void listJAR(
@@ -367,6 +370,7 @@ public final class Bck2BrwsrJars {
 
         final void addClassResource(String n) throws IOException {
             System.err.println("[JVDBG] Bck2BrwsrJars addCR for " + n+", proc = "+proc);
+       //  Thread.dumpStack();
             if (proc != null) {
                 try (InputStream is = this.get(n)) {
                     Map<String, byte[]> conv = proc.process(n, readFrom(is), new NoConvRes());

@@ -343,7 +343,7 @@ public final class Bck2Brwsr {
                                + " */\n");
             }
         }
-
+        System.err.println("[BCK] need to compile for "+this);
         VM.compile(out, this);
     }
     
