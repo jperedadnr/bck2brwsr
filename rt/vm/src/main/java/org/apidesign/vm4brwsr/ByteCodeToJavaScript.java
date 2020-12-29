@@ -17,8 +17,16 @@
  */
 package org.apidesign.vm4brwsr;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import org.apidesign.bck2brwsr.core.JavaScriptBody;
 import static org.apidesign.vm4brwsr.ByteCodeParser.*;
 import org.apidesign.vm4brwsr.ByteCodeParser.AnnotationParser;
@@ -39,7 +47,17 @@ abstract class ByteCodeToJavaScript {
     private final NumberOperations numbers = new NumberOperations();
     private final Appendable output;
     private boolean callbacks;
-
+    private static File CACHE_ROOT;
+    
+    static {
+        String cacheRootName = System.getProperty("user.home", "/tmp") + 
+                File.separator+".bck2brwsr"+ File.separator+"cache";
+        CACHE_ROOT = new File(cacheRootName);
+        if (!CACHE_ROOT.exists()) {
+            CACHE_ROOT.mkdirs();
+        }
+    }
+    
     protected ByteCodeToJavaScript(final Appendable out) {
         this.output = out;
     }
@@ -141,17 +159,56 @@ abstract class ByteCodeToJavaScript {
      */
 
     public String compile(InputStream classFile) throws IOException {
+   //     System.err.println("[CLASSDATA] created via ByteCodeToJavaScript");
         return compile(new ClassData(classFile));
     }
+    
+    public static String calculateCheckSum(File file) {
+        try {
+            // not looking for security, just a checksum. MD5 should be faster than SHA
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            try (final InputStream stream = new FileInputStream(file);
+                 final DigestInputStream dis = new DigestInputStream(stream, md5)) {
+                md5.reset();
+                byte[] buffer = new byte[4096];
+                while (dis.read(buffer) != -1) { /* empty loop body is intentional */ }
+                return Arrays.toString(md5.digest());
+            }
 
+        } catch (IllegalArgumentException | NoSuchAlgorithmException | IOException | SecurityException e) {
+            return "";
+        }
+    }
+    
+            
     protected String compile(ClassData classData) throws IOException {
+        System.err.println("[BC2JS] compile " + classData.getClassName());
+//        String cachedName = CACHE_ROOT +File.separator+ classData.getClassName();
+//        String jsName = cachedName+".js";
+//        File incache = new File(cachedName);
+//        File jsCache = new File(jsName);
+//        
+//        if (jsCache.exists()) {
+//            System.err.println("File in cache");
+//            String cached = Files.readString(jsCache.toPath());
+//            return cached;
+//        }
         this.jc = classData;
         final String cn = this.jc.getClassName();
+        String answer = null;
         try {
-            return compileImpl(this.output, cn);
+            answer = compileImpl(this.output, cn);
         } catch (IOException ex) {
             throw new IOException("Cannot compile " + cn + ":", ex);
         }
+//        Path p = incache.toPath();
+//        Files.createDirectories(p.getParent());
+//        //incache.mkdirs();
+//        Files.write(incache.toPath(), classData.getRawBytes());
+//        Files.writeString(jsCache.toPath(), answer);
+//        incache = null;
+//        jsCache = null;
+        return answer;
     }
 
     private String compileImpl(Appendable out, final String cn) throws IOException {
@@ -1063,6 +1120,7 @@ abstract class ByteCodeToJavaScript {
                 out.append("var stA0 = e;");
                 goTo(out, current, e.handler_pc, topMostLabel);
                 out.append("}\n");
+                out.append("else { console.trace(e.stack);}\n");
             } else {
                 finallyPC = e.handler_pc;
             }

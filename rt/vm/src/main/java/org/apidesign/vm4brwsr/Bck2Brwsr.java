@@ -193,9 +193,9 @@ public final class Bck2Brwsr {
      * @since 0.9
      */
     public Bck2Brwsr addClasses(String... classes) {
-        System.err.println("[BCK2BRWSR] add new classes: "
-                +java.util.Arrays.asList(classes));
-        Thread.dumpStack();
+     //   System.err.println("[BCK2BRWSR] add new classes: "
+       //         +java.util.Arrays.asList(classes));
+   //     Thread.dumpStack();
         if (classes.length == 0) {
             return this;
         } else {

@@ -129,6 +129,8 @@ final class ExportedSymbols {
             }
 
             try {
+    //          System.err.println("[CLASSDATA] created via EXPS");
+
                 final ClassData pkgInfoClass = new ClassData(is);
                 return isMarkedAsExported(
                                pkgInfoClass.findAnnotationData(true),

@@ -104,7 +104,7 @@ abstract class VM extends ByteCodeToJavaScript {
     }
 
     private void doCompile(Appendable out, StringArray names) throws IOException {
-        System.err.println("[BCK] doCompile, names = "+Arrays.asList(names.toArray()));
+      //  System.err.println("[BCK] doCompile, names = "+Arrays.asList(names.toArray()));
         generatePrologue(out);
         out.append("\n  var invoker = {};");
         out.append("\n  function registerClass(vm, name, fn) {");
