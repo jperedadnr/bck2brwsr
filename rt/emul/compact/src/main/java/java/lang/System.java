@@ -50,6 +50,9 @@ public class System {
 
     }
 
+    @JavaScriptBody(args = {}, body = "console.info('gc asked')")
+    public static native void gc();
+
     public static int identityHashCode(Object obj) {
         return Class.defaultHashCode(obj);
     }
