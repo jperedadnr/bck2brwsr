@@ -9,6 +9,7 @@ public class IntBuffer extends Buffer {
     protected IntBuffer(int[] arr) {
         this.data = arr;
         this.cap = arr.length;
+        this.limit(arr.length);
     }
 
     public static IntBuffer allocate(int capacity) {
@@ -47,6 +48,10 @@ public class IntBuffer extends Buffer {
     @Override
     public IntBuffer rewind() {
         return (IntBuffer)super.rewind();
+    }
+
+    public int get() {
+        return data[nextGetIndex()];
     }
 
     public IntBuffer put(int[] src, int offset, int length) {

@@ -10,6 +10,7 @@ public class ByteBuffer extends Buffer {
 
     protected ByteBuffer(byte[] arr) {
         this.data = arr;
+        this.limit(arr.length);
     }
 
     public static ByteBuffer allocate(int capacity) {
