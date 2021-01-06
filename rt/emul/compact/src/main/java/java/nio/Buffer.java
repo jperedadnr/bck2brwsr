@@ -26,6 +26,11 @@ public abstract class Buffer {
         return this;
     }
 
+    public Buffer position(int newPosition) {
+        this.position = newPosition;
+        return this;
+    }
+
     int nextGetIndex() {
         int answer = position;
         position++;
