@@ -58,4 +58,21 @@ public class ByteBuffer extends Buffer {
             (bigEndian == (ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN));
         return this;
     }
+
+    public final ByteBuffer put(byte[] src) {
+        return put(src, 0, src.length);
+    }
+
+    public ByteBuffer put(byte[] src, int offset, int length) {
+        for (int i = offset; i < offset + length; i++) {
+            put(src[i]);
+        }
+        return this;
+    }
+
+    public ByteBuffer put(byte b) {
+        data[nextPutIndex()] = b;
+        return this;
+    }
+
 }

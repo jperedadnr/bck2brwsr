@@ -32,5 +32,11 @@ public abstract class Buffer {
         return answer;
     }
 
+    int nextPutIndex() {
+        int answer = position;
+        position++;
+        return answer;
+    }
+
 
 }
