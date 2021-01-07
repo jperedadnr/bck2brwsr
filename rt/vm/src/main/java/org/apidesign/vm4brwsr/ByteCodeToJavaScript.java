@@ -1126,7 +1126,7 @@ abstract class ByteCodeToJavaScript {
                 out.append("var stA0 = e;");
                 goTo(out, current, e.handler_pc, topMostLabel);
                 out.append("}\n");
-                out.append("else { console.trace(e.stack);}\n");
+                // out.append("else { console.trace(e.stack);}\n");
             } else {
                 finallyPC = e.handler_pc;
             }
