@@ -213,7 +213,7 @@ final class ClassDataCache {
 
     private static InputStream loadClass(Bck2Brwsr.Resources l, String name)
             throws IOException {
-        System.err.println("Load class asked from "+l);
+      //  System.err.println("Load class asked from "+l);
         return l.get(name + ".class"); // NOI18N
     }
 }

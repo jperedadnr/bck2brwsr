@@ -182,7 +182,7 @@ abstract class ByteCodeToJavaScript {
     
             
     protected String compile(ClassData classData) throws IOException {
-        System.err.println("[BC2JS] compile " + classData.getClassName());
+ //       System.err.println("[BC2JS] compile " + classData.getClassName());
 //        String cachedName = CACHE_ROOT +File.separator+ classData.getClassName();
 //        String jsName = cachedName+".js";
 //        File incache = new File(cachedName);
@@ -520,6 +520,12 @@ abstract class ByteCodeToJavaScript {
                 if (debug(out, "  throw 'no code found for ")) {
                    out.append(jc.getClassName()).append('.')
                    .append(m.getName()).append("';\n");
+                }
+                if (m.isNative()) {
+                    out.append("return native_").append(className(jc)).append('_')
+                   .append(m.getName()).append("(");
+                    lmapper.outputArguments(out, m.isStatic());
+                     out.append(");\n");
                 }
             }
             if (defineProp) {
