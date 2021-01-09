@@ -75,4 +75,11 @@ public class ByteBuffer extends Buffer {
         return this;
     }
 
+    public IntBuffer asIntBuffer() {
+        return new ByteBufferAsIntBuffer(this);
+    }
+    
+    public ShortBuffer asShortBuffer() {
+        return new ByteBufferAsShortBuffer(this);
+    }
 }

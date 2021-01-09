@@ -1,27 +1,27 @@
 package java.nio;
 
-public class IntBuffer extends Buffer {
+public class ShortBuffer extends Buffer {
 
-    protected int[] data;
+    protected short[] data;
     private final int cap;
     private int offset = 0;
 
-    protected IntBuffer(int size) {
+    protected ShortBuffer(int size) {
         this.cap = size;
     }
     
-    protected IntBuffer(int[] arr) {
+    protected ShortBuffer(short[] arr) {
         this.data = arr;
         this.cap = arr.length;
         this.limit(arr.length);
     }
 
-    public static IntBuffer allocate(int capacity) {
-        return new IntBuffer(new int[capacity]);
+    public static ShortBuffer allocate(int capacity) {
+        return new ShortBuffer(new short[capacity]);
     }
 
-    public static IntBuffer wrap(int[] arr) {
-        return new IntBuffer(arr);
+    public static ShortBuffer wrap(short[] arr) {
+        return new ShortBuffer(arr);
     }
 
     public boolean isDirect() {
@@ -33,7 +33,7 @@ public class IntBuffer extends Buffer {
     }
 
     @Override
-    public int[] array() {
+    public short[] array() {
         return data;
     }
 
@@ -41,8 +41,8 @@ public class IntBuffer extends Buffer {
         return offset;
     }
 
-    public IntBuffer slice() {
-        return new IntBuffer(data);
+    public ShortBuffer slice() {
+        return new ShortBuffer(data);
     }
 
     public int capacity() {
@@ -50,23 +50,22 @@ public class IntBuffer extends Buffer {
     }
 
     @Override
-    public IntBuffer rewind() {
-        return (IntBuffer)super.rewind();
+    public ShortBuffer rewind() {
+        return (ShortBuffer)super.rewind();
     }
 
     public int get() {
         return data[nextGetIndex()];
     }
 
-    public IntBuffer put(int[] src, int offset, int length) {
+    public short get(int idx) {
+        return data[idx];
+    }
+    
+    public ShortBuffer put(short[] src, int offset, int length) {
         for (int i = offset; i < offset + length; i++) {
             data[position++] = src[i];
         }
-        return this;
-    }
-    
-    public IntBuffer put(int idx, int val) {
-        data[idx] = val;
         return this;
     }
 
