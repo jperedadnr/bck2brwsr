@@ -26,6 +26,10 @@ public abstract class Buffer {
         return this;
     }
 
+    public int position() {
+        return this.position;
+    }
+    
     public Buffer position(int newPosition) {
         this.position = newPosition;
         return this;
