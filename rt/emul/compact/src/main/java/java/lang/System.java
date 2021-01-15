@@ -61,6 +61,9 @@ public class System {
         if ("os.name".equals(name)) {
             return userAgent();
         }
+        if ("java.vendor".equals(name)) {
+            return "bck2brwsr";
+        }
         return (String) mprops.get(name);
     }
 
