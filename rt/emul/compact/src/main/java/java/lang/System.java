@@ -71,7 +71,7 @@ public class System {
     private static native String userAgent();
 
     public static String getProperty(String key, String def) {
-        String answer = (String) mprops.get(key);
+        String answer = getProperty(key);
         return (answer == null ? def : answer);
     }
 
