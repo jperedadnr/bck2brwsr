@@ -65,6 +65,7 @@
   </pluginRepositories>
   <build>
       <plugins>
+<!--
          <plugin>
               <inherited>false</inherited>
               <groupId>com.mycila</groupId>
@@ -104,9 +105,10 @@
                       <sbt>JAVADOC_STYLE</sbt>
                       <gradle>JAVADOC_STYLE</gradle>
                   </mapping>
-                  <failIfUnknown>true</failIfUnknown>
+                  <failIfUnknown>false</failIfUnknown>
               </configuration>
           </plugin>
+-->
            <plugin>
             <artifactId>maven-release-plugin</artifactId>
             <version>2.4</version>
