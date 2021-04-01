@@ -23,19 +23,11 @@
   <parent>
     <artifactId>bck2brwsr</artifactId>
     <groupId>org.apidesign</groupId>
-<<<<<<< HEAD
     <version>1.0-gvm-2</version>
   </parent>
   <groupId>org.apidesign.bck2brwsr</groupId>
   <artifactId>benchmarks</artifactId>
   <version>1.0-gvm-2</version>
-=======
-    <version>1.0-gvm-1</version>
-  </parent>
-  <groupId>org.apidesign.bck2brwsr</groupId>
-  <artifactId>benchmarks</artifactId>
-  <version>1.0-gvm-1</version>
->>>>>>> retrofox
   <packaging>pom</packaging>
   <name>Performance benchmarks</name>
   <modules>
