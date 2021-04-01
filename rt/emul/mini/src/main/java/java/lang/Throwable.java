@@ -748,6 +748,7 @@ public class Throwable implements Serializable {
 
     @JavaScriptBody(args = {}, body = 
         "var e = new Error();\n" +
+        "Error.stackTraceLimit=100;\n" +
         "return e.stack ? e.stack : null;\n"
     )
     private native String fillInStackTrace0();

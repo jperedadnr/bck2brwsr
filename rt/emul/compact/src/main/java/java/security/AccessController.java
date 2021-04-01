@@ -320,8 +320,10 @@ public final class AccessController {
      * @see #doPrivileged(PrivilegedAction)
      * @see #doPrivileged(PrivilegedExceptionAction,AccessControlContext)
      */
-//    public static native <T> T doPrivileged(PrivilegedAction<T> action,
-//                                            AccessControlContext context);
+    public static <T> T doPrivileged(PrivilegedAction<T> action,
+                                            AccessControlContext context) {
+        return doPrivileged(action);
+    }
 
     /**
      * Performs the specified <code>PrivilegedExceptionAction</code> with
@@ -433,6 +435,10 @@ public final class AccessController {
      * @return the AccessControlContext based on the current context.
      */
 
+    private static AccessControlContext staticContext = new AccessControlContext();
+    public static AccessControlContext getContext() {
+        return staticContext;
+    }
 //    public static AccessControlContext getContext()
 //    {
 //        AccessControlContext acc = getStackAccessControlContext();

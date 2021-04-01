@@ -25,6 +25,7 @@
 package org.apidesign.vm4brwsr;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -571,14 +572,35 @@ final class ByteCodeParser {
         private String pkgPrefix = "";
         private int pkgPrefixLen = 0;
         private boolean hasEnclosingMethod;
+        private byte[] raw;
 
         /**
          * Read classfile to disassemble.
          */
         public ClassData(InputStream infile) throws IOException {
-            this.read(new DataInputStream(infile));
+            //   infile.mark(Integer.MAX_VALUE);
+//            System.err.println("Reading bytes...");
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            byte[] buff = new byte[256];
+//            int l = infile.read(buff);
+//            while (l > -1) {
+//                baos.write(buff, 0, l);
+//                l = infile.read(buff);
+//            }
+//            baos.close();
+//            raw = baos.toByteArray();
+//            int total = raw.length;
+//            System.err.println("Did read "+total+" bytes");
+//
+//            ByteArrayInputStream infile2 = new ByteArrayInputStream(raw);
+//            this.read(new DataInputStream(infile2));
+this.read(new DataInputStream(infile));
         }
 
+        public byte[] getRawBytes() {
+            return raw;
+        }
+        
         /**
          * Reads and stores class file information.
          */
@@ -1990,6 +2012,10 @@ final class ByteCodeParser {
                 return true;
             }
             return false;
+        }
+        
+        public boolean isNative() {
+            return ((access & ACC_NATIVE) != 0);
         }
 
         /**

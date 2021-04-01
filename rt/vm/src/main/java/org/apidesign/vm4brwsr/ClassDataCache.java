@@ -49,6 +49,7 @@ final class ClassDataCache {
         if (cacheEntry == null) {
             final InputStream is = loadClass(resources, className);
             try {
+           //     System.err.println("[CLASSDATA] created via CDC");
                 cacheEntry = (is != null) ? new ClassData(is) : MISSING_CLASS;
             } catch (IOException ex) {
                 throw new IOException("Cannot process " + className, ex);
@@ -212,6 +213,7 @@ final class ClassDataCache {
 
     private static InputStream loadClass(Bck2Brwsr.Resources l, String name)
             throws IOException {
+      //  System.err.println("Load class asked from "+l);
         return l.get(name + ".class"); // NOI18N
     }
 }

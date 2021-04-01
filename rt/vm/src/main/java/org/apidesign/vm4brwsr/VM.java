@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.Base64;
 import org.apidesign.bck2brwsr.core.JavaScriptBody;
 import org.apidesign.vm4brwsr.ByteCodeParser.ClassData;
@@ -77,6 +78,7 @@ abstract class VM extends ByteCodeToJavaScript {
 
         VM vm;
         if (config.isExtension()) {
+            System.err.println("[BCK] config is extension");
             vm = new Extension(out,
                 config.getResources(), both, config.exported(),
                 config.allResources(), config.classpath()
@@ -84,6 +86,7 @@ abstract class VM extends ByteCodeToJavaScript {
             addThree = true;
         } else {
             if (config.includeVM()) {
+                System.err.println("[BCK] config has includeVM");
                 fixedNames.add(VM.class.getName().replace('.', '/'));
                 addThree = true;
             }
@@ -101,6 +104,7 @@ abstract class VM extends ByteCodeToJavaScript {
     }
 
     private void doCompile(Appendable out, StringArray names) throws IOException {
+      //  System.err.println("[BCK] doCompile, names = "+Arrays.asList(names.toArray()));
         generatePrologue(out);
         out.append("\n  var invoker = {};");
         out.append("\n  function registerClass(vm, name, fn) {");
@@ -838,6 +842,14 @@ abstract class VM extends ByteCodeToJavaScript {
             StringArray asBinary, StringArray classpath
         ) throws IOException {
             super(out, resources, explicitlyExported, asBinary);
+            // System.err.println("[JVDBG] VM created extension "+this+" with extClassesArray = "+
+                    // java.util.Arrays.asList(extClassesArray));
+            // System.err.println("[JVDBG] VMEXT "+this+" has cp "+ 
+                    // (classpath == null ? "NULL" :
+                    // java.util.Arrays.asList(classpath.toArray())));
+            // System.err.println("[JVDBG] VMEXT "+this+" has expl "+
+                    // (explicitlyExported == null? "NULL" :
+                    // java.util.Arrays.asList(explicitlyExported.toArray())));
             this.extensionClasses = StringArray.asList(extClassesArray);
             this.classpath = classpath;
         }
@@ -899,8 +911,10 @@ abstract class VM extends ByteCodeToJavaScript {
         @Override
         String accessClass(String className) {
             if (this.extensionClasses.contains(className.replace('_', '/'))) {
+                // System.err.println("[JVDBG] VMextension, accessClass asked for "+className+" is simple");
                 return className;
             }
+             // System.err.println("[JVDBG] VMextension, accessClass asked for "+className+" is NOT simple");
             return super.accessClass(className);
         }
 

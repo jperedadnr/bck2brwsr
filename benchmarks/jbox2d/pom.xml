@@ -23,12 +23,20 @@
 
   <groupId>org.apidesign.bck2brwsr</groupId>
   <artifactId>jbox2d</artifactId>
+<<<<<<< HEAD
   <version>1.0-gvm-2</version>
+=======
+  <version>1.0-gvm-1</version>
+>>>>>>> retrofox
   <packaging>jar</packaging>
   <parent>
     <artifactId>benchmarks</artifactId>
     <groupId>org.apidesign.bck2brwsr</groupId>
+<<<<<<< HEAD
     <version>1.0-gvm-2</version>
+=======
+    <version>1.0-gvm-1</version>
+>>>>>>> retrofox
   </parent>
 
   <name>JBox2D in Action</name>

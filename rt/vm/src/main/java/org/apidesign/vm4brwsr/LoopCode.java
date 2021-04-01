@@ -700,6 +700,7 @@ class LoopCode implements Runnable {
                         sb.append("  mi[2]: ").append(mi[2]).append("\n");
                         sb.append("  mn   : ").append(mn).append("\n");
                         sb.append("  name and type: ").append(jc.stringValue(c2.cpx2, true)).append("\n");
+                        Thread.dumpStack();
                         throw new IOException(sb.toString());
                         /*
                         CPX2 nameAndType = jc.getCpoolEntry(c2.cpx2);

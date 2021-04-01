@@ -37,7 +37,11 @@
     <dependency>
       <groupId>org.apidesign.bck2brwsr</groupId>
       <artifactId>core</artifactId>
+<<<<<<< HEAD
       <version>1.0-gvm-2</version>
+=======
+      <version>1.0-gvm-1</version>
+>>>>>>> retrofox
       <type>jar</type>
       <scope>provided</scope>
     </dependency>

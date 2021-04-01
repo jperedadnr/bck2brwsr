@@ -26,6 +26,8 @@
 package java.lang;
 
 import java.util.Map;
+import org.apidesign.bck2brwsr.core.JavaScriptBody;
+
 
 
 /**
@@ -134,7 +136,7 @@ class Thread implements Runnable {
    /**
      * The default priority that is assigned to a thread.
      */
-    public final static int NORM_PRIORITY = 5;
+    public final static int NORM_PRIORITY = 6;
 
     /**
      * The maximum priority that a thread can have.
@@ -504,7 +506,10 @@ class Thread implements Runnable {
      * @see        #stop()
      */
     public void start() {
-        throw new SecurityException();
+             scheduleThread(target);
+        //  run();
+// System.err.println("I should start a thread now...");
+        // throw new SecurityException();
     }
 
     /**
@@ -522,9 +527,20 @@ class Thread implements Runnable {
     @Override
     public void run() {
         if (target != null) {
-            target.run();
+             // target.run();
+// System.err.println("[JVDBG] THREAD.RUN call 0 ");
+             scheduleThread(target);
+// System.err.println("[JVDBG] THREAD.RUN call 1 ");
         }
     }
+
+    @JavaScriptBody(args = "r", body =
+        "window.setTimeout(function() {\n" +
+        "  r.run();\n" +
+        "}, 0);\n"
+    )
+    private static native void scheduleThread(Runnable r);
+
 
     /**
      * Forces the thread to stop executing.
@@ -844,7 +860,7 @@ class Thread implements Runnable {
      * @see        ThreadGroup#getMaxPriority()
      */
     public final void setPriority(int newPriority) {
-        throw new SecurityException();
+        // throw new SecurityException();
     }
 
     /**
@@ -872,7 +888,7 @@ class Thread implements Runnable {
      * @see        #checkAccess()
      */
     public final void setName(String name) {
-        throw new SecurityException();
+        this.name = name;
     }
 
     /**
@@ -1063,7 +1079,6 @@ class Thread implements Runnable {
      *          thread cannot modify this thread
      */
     public final void setDaemon(boolean on) {
-        throw new SecurityException();
     }
 
     /**
@@ -1090,7 +1105,6 @@ class Thread implements Runnable {
      * @see        SecurityManager#checkAccess(Thread)
      */
     public final void checkAccess() {
-        throw new SecurityException();
     }
 
     /**
@@ -1464,7 +1478,7 @@ class Thread implements Runnable {
      * @since 1.5
      */
     public static void setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
-        throw new SecurityException();
+        defaultUncaughtExceptionHandler = eh;
     }
 
     /**
