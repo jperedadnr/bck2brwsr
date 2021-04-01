@@ -32,7 +32,7 @@
             <classifier>linux</classifier>
             <version>${javafx.version}</version>
             <scope>system</scope>
-            <systemPath>/home/johan/openjfx/github/jfx/build/sdk/lib/javafx.base.jar</systemPath>
+            <systemPath>/home/johan/openjfx/gluon/gluonjfx/build/sdk/lib/javafx.base.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -40,7 +40,7 @@
             <classifier>linux</classifier>
             <version>${javafx.version}</version>
             <scope>system</scope>
-            <systemPath>/home/johan/openjfx/github/jfx/build/sdk/lib/javafx.controls.jar</systemPath>
+            <systemPath>/home/johan/openjfx/gluon/gluonjfx/build/sdk/lib/javafx.controls.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -48,7 +48,7 @@
             <classifier>linux</classifier>
             <version>${javafx.version}</version>
             <scope>system</scope>
-            <systemPath>/home/johan/openjfx/github/jfx/build/sdk/lib/javafx.graphics.jar</systemPath>
+            <systemPath>/home/johan/openjfx/gluon/gluonjfx/build/sdk/lib/javafx.graphics.jar</systemPath>
         </dependency>
   </dependencies>
 
