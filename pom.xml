@@ -22,7 +22,7 @@
       <javadoc.opts>-author</javadoc.opts>
   </properties>
   <modules>
-    <!-- <module>javaquery</module> -->
+    <module>javaquery</module>
     <!-- <module>ko</module> -->
     <module>launcher</module>
     <module>rt</module>
