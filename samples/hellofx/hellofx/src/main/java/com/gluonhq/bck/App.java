@@ -2,13 +2,13 @@ package com.gluonhq.bck;
 
 import javafx.animation.*;
 import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 
@@ -21,13 +21,31 @@ public class App extends Application {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
         Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-Rectangle r = new Rectangle(30,10,250,250);
+Group root = new Group();
+Rectangle r = new Rectangle(30,50,250,250);
 r.setFill(Color.YELLOW);
-// Rectangle r2 = new Rectangle(0,0,50,50);
-// r2.setFill(Color.BLUE);
+ Rectangle r2 = new Rectangle(10,20,50,50);
+ r2.setFill(Color.BLUE);
+  r2.setTranslateX(200);
+Circle c = new Circle(40);
+c.setCenterX(300);
+c.setCenterY(60);
+c.setFill(Color.RED);
+      TranslateTransition tt = new TranslateTransition(Duration.millis(10000), r2);
+     tt.setByX(200f);
+//     Button b = new Button("CLICKME");
+//     b.setTranslateY(350);
+//     tt.setCycleCount(4f);
+//     tt.setAutoReverse(true);
+ 
         // VBox root = new VBox(30, r, r2);
-        VBox root = new VBox(30, r);
-        root.setAlignment(Pos.CENTER);
+        // VBox root = new VBox(30, r);
+        // root.setAlignment(Pos.CENTER);
+root.getChildren().add(r);
+root.getChildren().add(r2);
+root.getChildren().add(c);
+//root.getChildren().add(b);
+
         Scene scene = new Scene(root, 640, 480);
 scene.setFill(Color.GREEN);
 
@@ -53,6 +71,8 @@ scene.setFill(Color.GREEN);
         // scene.getStylesheets().add(HelloFX.class.getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+        tt.play();
+
         System.out.println( "Hello FX, start done!" );
 /*
 animation.playFromStart();
