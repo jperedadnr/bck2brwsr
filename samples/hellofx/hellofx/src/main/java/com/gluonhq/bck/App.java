@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,10 +33,14 @@ Circle c = new Circle(40);
 c.setCenterX(300);
 c.setCenterY(60);
 c.setFill(Color.RED);
+
+         ImageView imageView = new ImageView(new Image(App.class.getResourceAsStream("/openduke.png")));
+         imageView.setFitHeight(200);
+         imageView.setPreserveRatio(true);
       TranslateTransition tt = new TranslateTransition(Duration.millis(10000), r2);
      tt.setByX(200f);
-//     Button b = new Button("CLICKME");
-//     b.setTranslateY(350);
+     Button b = new Button("CLICKME");
+     b.setTranslateY(350);
 //     tt.setCycleCount(4f);
 //     tt.setAutoReverse(true);
  
@@ -44,7 +50,7 @@ c.setFill(Color.RED);
 root.getChildren().add(r);
 root.getChildren().add(r2);
 root.getChildren().add(c);
-//root.getChildren().add(b);
+root.getChildren().add(imageView);
 
         Scene scene = new Scene(root, 640, 480);
 scene.setFill(Color.GREEN);

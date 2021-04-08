@@ -17,6 +17,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <javafx.version>16</javafx.version>
+    <aot.version>1.0-gvm-2</aot.version>
   </properties>
 
   <dependencies>
@@ -55,6 +56,18 @@
             <scope>system</scope>
             <systemPath>/home/johan/openjfx/gluon/gluonjfx/build/sdk/lib/javafx.graphics.jar</systemPath>
         </dependency>
+    <dependency>
+      <groupId>org.apidesign.bck2brwsr</groupId>
+      <artifactId>emul.zip</artifactId>
+      <version>${aot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apidesign.bck2brwsr</groupId>
+      <artifactId>emul.zip</artifactId>
+      <version>${aot.version}</version>
+      <classifier>bck2brwsr</classifier>
+    </dependency>
+
   </dependencies>
 
   <build>
