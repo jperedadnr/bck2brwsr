@@ -37,6 +37,15 @@ public class ByteBuffer extends Buffer {
         return data;
     }
 
+    public byte get(int idx) {
+        return data[idx];
+    }
+
+    public ByteBuffer put(int idx, byte v) {
+        data[idx] = v;
+        return this;
+    }
+
     @Override
     public int arrayOffset() {
         return this.offset;
