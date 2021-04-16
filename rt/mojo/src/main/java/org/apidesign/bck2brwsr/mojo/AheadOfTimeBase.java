@@ -136,6 +136,8 @@ abstract class AheadOfTimeBase<Art> {
     }
 
     private void aotLibrary(Art a, Iterable<Art> allArtifacts, File js, URLClassLoader loader, List<String> libsCp) throws IOException {
+// System.err.println("[JV] aotlib, a = " + a+" all = " + allArtifacts+", js = " + js+", loader = " + loader+", lbscp = " + libsCp);
+// Thread.dumpStack();
         File aFile = file(a);
         if (js.lastModified() > aFile.lastModified()) {
             logInfo("Skipping " + js + " as it already exists.");
@@ -145,11 +147,13 @@ abstract class AheadOfTimeBase<Art> {
         for (Art b : allArtifacts) {
             final File file = file(b);
             if ("bck2brwsr".equals(classifier(b))) { // NOI18N
+// System.err.println("Consider artifact " + b+" at file " + file);
                 JarFile jf = new JarFile(file);
                 Manifest man = jf.getManifest();
                 for (Map.Entry<String, Attributes> entrySet : man.getEntries().entrySet()) {
                     String entryName = entrySet.getKey();
                     Attributes attr = entrySet.getValue();
+// System.err.println("Attr = " + attr+" and name = " + entryName);
 
                     if (
                         artifactId(a).equals(attr.getValue("Bck2BrwsrArtifactId")) &&

@@ -174,7 +174,7 @@ public final class Bck2BrwsrJars {
         if (c == null) {
             c = Bck2Brwsr.newCompiler();
         }
-        System.err.println("[BCK2BRWSR] almost leaving configureFrom, jar = "+jar);
+        // System.err.println("[BCK2BRWSR] almost leaving configureFrom, jar = "+jar);
 
         Bck2Brwsr answer = c
             .library(parts)
@@ -182,7 +182,7 @@ public final class Bck2BrwsrJars {
             .addExported(exported.toArray(new String[exported.size()]))
             .addResources(resources.toArray(new String[resources.size()]))
             .resources(jarRes);
-        System.err.println("[BCK2BRWSR] leaving configureFrom, jar = "+jar+", and answer = "+answer);
+        // System.err.println("[BCK2BRWSR] leaving configureFrom, jar = "+jar+", and answer = "+answer);
         return answer;
     }
     
@@ -369,14 +369,14 @@ public final class Bck2BrwsrJars {
         }
 
         final void addClassResource(String n) throws IOException {
-            System.err.println("[JVDBG] Bck2BrwsrJars addCR for " + n+", proc = "+proc);
+            // System.err.println("[JVDBG] Bck2BrwsrJars addCR for " + n+", proc = "+proc);
        //  Thread.dumpStack();
             if (proc != null) {
                 try (InputStream is = this.get(n)) {
                     Map<String, byte[]> conv = proc.process(n, readFrom(is), new NoConvRes());
                     if (conv != null) {
                         boolean found = false;
-                        System.err.println("[JVDBG] Bck2BrwsrJars, process entries: "+conv.entrySet());
+                        // System.err.println("[JVDBG] Bck2BrwsrJars, process entries: "+conv.entrySet());
                         for (Map.Entry<String, byte[]> entrySet : conv.entrySet()) {
                             String res = entrySet.getKey();
                             byte[] bytes = entrySet.getValue();
@@ -385,7 +385,7 @@ public final class Bck2BrwsrJars {
                             }
                             assert res.endsWith(".class") : "Wrong resource: " + res;
                             converted.put(res, bytes);
-                            System.err.println("BCK-> add class "+res);
+                            // System.err.println("BCK-> add class "+res);
                             classes.add(res.substring(0, res.length() - 6));
                         }
                         if (!found) {

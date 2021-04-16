@@ -99,7 +99,9 @@ public class AheadOfTime extends AbstractMojo {
     
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+// System.err.println("[EXECUTE]");
         final Set<Artifact> artifacts = prj.getArtifacts();
+// System.err.println("[EXECUTE] art = " + artifacts);
         boolean foundEmul = false;
         for (Artifact a : artifacts) {
             if (
@@ -240,6 +242,7 @@ public class AheadOfTime extends AbstractMojo {
                 return a.getVersion();
             }
         }
+// System.err.println("[EXECUTE] done art = " + artifacts);
         new Work().work();
     }
 }
