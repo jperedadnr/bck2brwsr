@@ -19,7 +19,8 @@
     <javafx.version>16</javafx.version>
     <aot.version>1.0-gvm-2</aot.version>
     <!-- <systemPath>/home/johan/openjfx/github/jfx/build/sdk/lib</systemPath> -->
-    <systemPath>/home/johan/openjfx/gluon/gluonjfx/build/sdk/lib</systemPath>
+    <!-- <systemPath>/home/johan/openjfx/gluon/gluonjfx/build/sdk/lib</systemPath> -->
+    <aotpath>/tmp/lib</aotpath>
   </properties>
 
   <dependencies>
@@ -37,26 +38,41 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
-            <classifier>linux</classifier>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <classifier>bck2brwsr</classifier>
             <version>${javafx.version}</version>
             <scope>system</scope>
-            <systemPath>${systemPath}/javafx.base.jar</systemPath>
+            <systemPath>${aotpath}/javafx.base.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <classifier>linux</classifier>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <classifier>bck2brwsr</classifier>
             <version>${javafx.version}</version>
             <scope>system</scope>
-            <systemPath>${systemPath}/javafx.controls.jar</systemPath>
+            <systemPath>/tmp/lib/javafx.controls.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <classifier>linux</classifier>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <classifier>bck2brwsr</classifier>
             <version>${javafx.version}</version>
             <scope>system</scope>
-            <systemPath>${systemPath}/javafx.graphics.jar</systemPath>
+            <systemPath>/tmp/lib/javafx.graphics.jar</systemPath>
         </dependency>
     <dependency>
       <groupId>org.apidesign.bck2brwsr</groupId>
@@ -88,6 +104,9 @@
             <groupId>org.apidesign.bck2brwsr</groupId>
             <artifactId>bck2brwsr-maven-plugin</artifactId>
             <version>1.0-gvm-2</version>
+            <configuration>
+                <generateAotLibraries>true</generateAotLibraries>
+            </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
