@@ -51,7 +51,7 @@ public class FloatBuffer extends Buffer {
 
     @Override
     public FloatBuffer rewind() {
-        return (IntBuffer)super.rewind();
+        return (FloatBuffer)super.rewind();
     }
 
     public float get() {
@@ -67,6 +67,11 @@ public class FloatBuffer extends Buffer {
     
     public FloatBuffer put(int idx, float val) {
         data[idx] = val;
+        return this;
+    }
+
+    public FloatBuffer put(float f) {
+        data[nextPutIndex()] = f;
         return this;
     }
 
