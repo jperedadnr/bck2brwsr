@@ -1,6 +1,6 @@
 package java.nio;
 
-class ByteBufferAsFloatBuffer extends ShortBuffer {
+class ByteBufferAsFloatBuffer extends FloatBuffer {
 
     protected final ByteBuffer bb;
 
