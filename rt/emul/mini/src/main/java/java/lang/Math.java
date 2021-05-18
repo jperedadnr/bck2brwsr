@@ -1313,4 +1313,9 @@ public final class Math {
 //    public static float scalb(float f, int scaleFactor) {
 //        return sun.misc.FpUtils.scalb(f, scaleFactor);
 //    }
+
+    public static double hypot(double x, double y) {
+        return sqrt(x * x + y * y);
+    }
+
 }

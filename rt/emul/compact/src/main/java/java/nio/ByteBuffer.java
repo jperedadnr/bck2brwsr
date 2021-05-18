@@ -96,4 +96,9 @@ public class ByteBuffer extends Buffer {
     public ShortBuffer asShortBuffer() {
         return new ByteBufferAsShortBuffer(this);
     }
+
+    public FloatBuffer asFloatBuffer() {
+        return new ByteBufferAsFloatBuffer(this);
+    }
+
 }

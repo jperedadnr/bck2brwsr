@@ -21,6 +21,10 @@ public abstract class Buffer {
         return limit - position;
     }
 
+    public final int limit() {
+        return limit;
+    }
+
     public Buffer limit(int newLimit) {
         limit = newLimit;
         return this;
@@ -47,5 +51,9 @@ public abstract class Buffer {
         return answer;
     }
 
+    Buffer clear() {
+        position = 0;
+        return this;
+    }
 
 }

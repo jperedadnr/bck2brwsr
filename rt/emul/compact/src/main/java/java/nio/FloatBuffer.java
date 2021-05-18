@@ -54,6 +54,10 @@ public class FloatBuffer extends Buffer {
         return (FloatBuffer)super.rewind();
     }
 
+    public float get(int idx) {
+        return data[idx];
+    }
+
     public float get() {
         return data[nextGetIndex()];
     }
@@ -73,6 +77,15 @@ public class FloatBuffer extends Buffer {
     public FloatBuffer put(float f) {
         data[nextPutIndex()] = f;
         return this;
+    }
+
+    FloatBuffer clear() {
+        super.clear();
+        return this;
+    }
+
+    public FloatBuffer limit(int newLimit) {
+        return (FloatBuffer) super.limit(newLimit);
     }
 
 }
